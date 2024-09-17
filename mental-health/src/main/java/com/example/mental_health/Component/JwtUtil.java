@@ -20,7 +20,7 @@ public class JwtUtil {
                 .setSubject(user.getUsername())
                 .claim("roles", user.getRole())
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 1000)) // Token expires in 10 hours
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 3600 * 10)) // Token expires in 10 hours
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
                 .compact();
     }
