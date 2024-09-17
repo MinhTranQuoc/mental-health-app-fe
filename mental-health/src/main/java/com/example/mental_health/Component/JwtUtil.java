@@ -15,18 +15,18 @@ public class JwtUtil {
     private final String SECRET_KEY = "secret";
 
     public String generateToken(UserEntity user) {
-        // Tạo token với thông tin người dùng
+        // Generate token with user information
         return Jwts.builder()
                 .setSubject(user.getUsername())
                 .claim("roles", user.getRole())
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // Token hết hạn sau 10 giờ
+                .setExpiration(new Date(System.currentTimeMillis() + 1000)) // Token expires in 10 hours
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
                 .compact();
     }
 
     public Boolean validateToken(String token) {
-        // Kiểm tra tính hợp lệ của token
+        // Validate token
         return !isTokenExpired(token);
     }
 
