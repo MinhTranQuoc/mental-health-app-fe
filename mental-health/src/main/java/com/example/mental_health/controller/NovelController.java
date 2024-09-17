@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/novel")
 @CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("/novel")
+
 @RequiredArgsConstructor
 public class NovelController {
 

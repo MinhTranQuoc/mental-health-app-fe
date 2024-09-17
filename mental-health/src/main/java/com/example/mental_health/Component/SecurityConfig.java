@@ -22,9 +22,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/auth/login", "/auth/register").permitAll()
-                .antMatchers("/novel/novels").permitAll()
-                .antMatchers("/novel/hot-novel").authenticated()
-                .antMatchers("/auth/me").authenticated()
+                .antMatchers("/novel/novels", "/novel/hot-novel", "/auth/me").authenticated()
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
