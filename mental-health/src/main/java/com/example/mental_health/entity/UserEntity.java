@@ -37,6 +37,9 @@ public class UserEntity implements UserDetails {
     @Column(name = "reader_name")
     private String readerName;
 
+    @Column(name = "email")
+    private String email;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singletonList(new SimpleGrantedAuthority(role));

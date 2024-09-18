@@ -38,10 +38,15 @@ public class AuthServiceImpl implements IAuthService {
     }
 
     @Override
-    public UserEntity register(String username, String password, String avatar, String role) {
+    public UserEntity register(String username, String password, String email) {
         // Kiểm tra xem người dùng đã tồn tại chưa
         if (userRepository.findByUsername(username).isPresent()) {
             throw new RuntimeException("User already exists");
+        }
+
+        // Kiểm tra xem email đã tồn tại chưa
+        if (userRepository.findByEmail(email).isPresent()) {
+            throw new RuntimeException("Email already exists");
         }
 
         // Mã hóa mật khẩu
@@ -51,12 +56,13 @@ public class AuthServiceImpl implements IAuthService {
         UserEntity newUser = UserEntity.builder()
                 .username(username)
                 .password(encodedPassword)
-                .avatar(avatar)
-                .role(role)
+                .email(email)
+                .role("user")
                 .build();
 
         return userRepository.save(newUser);
     }
+
 
     // Thêm phương thức này để lấy thông tin người dùng
     @Override
