@@ -28,8 +28,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/novel/novels", "/novel/hot-novel","/auth/login", "/auth/register").permitAll()
-                .antMatchers( "/auth/me").authenticated()
+                .antMatchers("/auth/login", "/auth/register").permitAll()
+                .antMatchers( "/novel/novels", "/novel/hot-novel","/auth/me").authenticated()
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);

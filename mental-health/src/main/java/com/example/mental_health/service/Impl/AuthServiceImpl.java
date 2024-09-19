@@ -23,9 +23,9 @@ public class AuthServiceImpl implements IAuthService {
     private BCryptPasswordEncoder passwordEncoder;
 
     @Override
-    public String authenticate(String username, String password) {
+    public String authenticate(String keyword, String password) {
         // Tìm người dùng
-        UserEntity user = userRepository.findByUsername(username)
+        UserEntity user = userRepository.searchByKeyword(keyword)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
         // Kiểm tra mật khẩu
@@ -66,8 +66,8 @@ public class AuthServiceImpl implements IAuthService {
 
     // Thêm phương thức này để lấy thông tin người dùng
     @Override
-    public UserEntity findByUsername(String username) {
-        return userRepository.findByUsername(username)
+    public UserEntity findByUsername(String keyword) {
+        return userRepository.searchByKeyword(keyword)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 }

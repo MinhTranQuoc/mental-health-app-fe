@@ -25,10 +25,10 @@ public class AuthController {
     public ResponseHtmlStatus<?> login(@RequestBody LoginRequestDto loginRequest) {
         try {
             // Xác thực người dùng và lấy token
-            String token = authService.authenticate(loginRequest.getUsername(), loginRequest.getPassword());
+            String token = authService.authenticate(loginRequest.getKeyword(), loginRequest.getPassword());
 
             // Lấy thông tin người dùng từ username
-            UserEntity user = authService.findByUsername(loginRequest.getUsername());
+            UserEntity user = authService.findByUsername(loginRequest.getKeyword());
 
             // Trả về token, readername và avatar
             return new ResponseHtmlStatus<>(HttpStatus.OK, "Login success",
